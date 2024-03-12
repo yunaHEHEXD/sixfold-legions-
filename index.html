@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sixfold Legion</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;700&display=swap">
+  <style>
+    body {
+      background-color: #9b1826;
+      color: #fce7b0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      position: relative;
+    }
+
+    header {
+      background-color: #394147;
+      color: #fce7b0;
+      text-align: center;
+      padding: 1em;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    h1 {
+      font-family: 'Lucidity Condensed', sans-serif;
+      font-size: 48.9px;
+      font-weight: bold;
+      margin: 0;
+      display: flex;
+      align-items: center;
+    }
+
+    .star {
+      font-size: 41px;
+      color: #ce3938;
+    }
+
+    .star-left {
+      margin-right: 6px;
+    }
+
+    .star-right {
+      margin-left: 6px;
+      color: #394147;
+      display: none;
+    }
+
+    nav {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      flex: 1;
+    }
+
+    nav a {
+      color: #fce7b0;
+      text-decoration: none;
+      font-family: 'Canva Sans', sans-serif;
+      font-size: 25.3px;
+      margin: 0 15px;
+      cursor: pointer;
+      transition: font-weight 0.3s, background-color 0.3s;
+      border-radius: 15px;
+      padding: 10px 15px;
+      display: flex;
+      align-items: centers;
+    }
+
+    nav a .star {
+      display: none;
+    }
+
+    nav a:hover,
+    nav a.active {
+      font-weight: bold;
+      background-color: #ce3938;
+    }
+
+    nav a.active .star {
+      display: inline-block;
+    }
+
+    section {
+      position: relative;
+      padding: 2em;
+      text-align: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    section img {
+      max-width: 100%;
+      height: auto;
+    }
+
+    footer {
+      background-color: #9b1826;
+      padding: 3em;
+      text-align: center;
+      color: #fce7b0;
+      margin-top: auto;
+      position: relative;
+    }
+
+    #streamingImage {
+      position: absolute;
+      bottom: 20px;
+      left: 35%;
+      transform: translateX(-50%);
+      width: 350px;
+      display: none;
+      z-index: 2;
+    }
+
+    #streamingText {
+      color: #fce7b0;
+      font-size: 70px;
+      font-weight: bold;
+      font-family: 'EB Garamond', serif;
+      text-transform: uppercase;
+      position: absolute;
+      top: 20.5%;
+      left: 53.5%;
+      transform: translate(-50%, -50%);
+      display: none;
+      text-shadow: 3px 3px 0 blue, -3px -3px 0 red;
+      z-index: 3;
+    }
+
+    #additionalText {
+      color: #fce7b0;
+      font-size: 24.5px;
+      font-family: 'Lucidity Condensed', sans-serif;
+      text-transform: uppercase;
+      position: absolute;
+      top: 40%;
+      left: 65%;
+      transform: translate(-50%, -50%);
+      display: none;
+    }
+
+    #newText {
+      color: #fce7b0;
+      font-size: 98px;
+      font-family: 'EB Garamond', sans-serif;
+      text-transform: uppercase;
+      position: absolute;
+      top: 31%;
+      left: 54%;
+      transform: translate(-50%, -50%);
+      display: none;
+      -webkit-text-stroke: 1.5px #ce3938;
+      color: transparent;
+    }
+
+    #letsPlayText {
+      color: transparent;
+      font-size: 98px;
+      font-family: 'EB Garamond', sans-serif;
+      text-transform: uppercase;
+      position: absolute;
+      top: 85%;
+      left: 54%;
+      transform: translate(-50%, -50%);
+      display: none;
+      -webkit-text-stroke: 1.5px #308292;
+      z-index: 1;
+    }
+
+    #membersList {
+      color: #fce7b0;
+      font-size: 12px;
+      font-family: 'Lucidity Condensed', sans-serif;
+      text-transform: uppercase;
+      position: absolute;
+      top: 59%;
+      left: 66%;
+      transform: translate(-50%, -50%);
+      list-style-type: none;
+      padding: 0;
+      display: none;
+    }
+
+    #membersList li {
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+    }
+
+    #membersList li .star {
+      margin-right: 3px;
+      font-size: 20px;
+    }
+
+    #membersList li:not(:last-child) {
+      margin-right: 10px;
+    }
+
+    #aboutUsText {
+      color: #fce7b0;
+      font-size: 18px;
+      font-family: 'Lucidity Condensed', sans-serif;
+      font-weight: bold;
+      text-transform: uppercase;
+      position: absolute;
+      bottom: 20px;
+      left: 5%;
+      text-align: left;
+      margin-left: 20px;
+      max-width: 300px;
+      word-wrap: break-word;
+      display: none;
+      z-index: 2;
+    }
+
+    #helloText {
+      color: #fce7b0;
+      font-size: 10.5px;
+      font-family: 'EB Garamond', sans-serif;
+      text-transform: uppercase;
+      position: absolute;
+      top: 69%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      display: none;
+      text-shadow: 5px 5px 10px #000, -5px -5px 10px #000;
+      background: linear-gradient(180deg, #9b1826, #9b1826);
+      padding: 20px 20px;
+      border-radius: 5px;
+    }
+
+    #helloText h2 {
+      margin: 5px 0;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>
+      <div class="star star-left">&#9733;</div>
+      SIXFOLD LEGION
+      <div class="star star-right">&#9733;</div>
+    </h1>
+    <nav>
+      <a href="#" onclick="showContent('about')"><span>About Us</span><span class="star star-right">&#9733;</span></a>
+      <a href="#" onclick="showContent('streamPlan')"><span>Stream Plan</span><span class="star star-right">&#9733;</span></a>
+      <a href="#" onclick="showContent('promote')"><span>Promote</span><span class="star star-right">&#9733;</span></a>
+      <a href="#" onclick="showContent('home')"><span>Home Page</span><span class="star star-right">&#9733;</span></a>
+    </nav>
+  </header>
+  <section id="content">
+  </section>
+  <div id="streamingText">LET'S PLAY</div>
+  <div id="additionalText">MEET THE MEMBERS:</div>
+  <ul id="membersList">
+    <li><span class="star star-left">&#9733;</span> James</li>
+    <li><span class="star star-left">&#9733;</span> Lahra</li>
+    <li><span class="star star-left">&#9733;</span> Alexandra</li>
+    <li><span class="star star-left">&#9733;</span> Charlene</li>
+    <li><span class="star star-left">&#9733;</span> Yuan</li>
+    <li><span class="star star-left">&#9733;</span> Neve</li>
+  </ul>
+  <div id="newText">LET'S PLAY</div>
+  <img id="streamingImage" src="stream.png" alt="Stream Image">
+  <img id="promotionImage" src="poster.png" alt="Promotionimage" style="max-width: 100%; height: auto; display: block; margin: auto;">
+  <div id="promotionLinks" style="text-align: center; margin-top: 20px; display: none;">
+    <a href="https://www.facebook.com/profile.php?id=61554698216858" style="color:#0066cc; font-weight: bold; display: inline-block; padding: 10px 20px; background-color: #394147; border-radius: 15px" ><span>Facebook Promotion Link</span></a>
+
+    <a href="https://www.youtube.com/@SixfoldLegion" style="color: #0066cc; font-weight: bold;  display: inline-block; padding: 10px 20px; background-color: #394147; border-radius: 15px "><span>YouTube Promotion Link</span></a>
+  </div>
+
+  <div id="SixfoldLegion" style="text-align: center; display: flex; justify-content: center; align-items: center; margin-bottom: 20px;">
+    <a id="sixfoldLink" href="https://drive.google.com/file/d/1dFS4j9lbgF_kzVry0kaBHlOz-XB5AMDj/view?usp=drive_link" style="color: #0066cc; font-weight: bold;  display: inline-block; padding: 10px 20px; background-color: #394147; border-radius: 15px;"><span>SixfoldLegion</span></a>
+  </div>
+  
+  <div style="display: flex; justify-content: center; margin-bottom: 20px;">
+    <img src="subheading.png" alt="Image 1" style="max-width: 250px; margin: 0 5px;">
+    <img src="sub2.png" alt="Image 2" style="max-width: 250px; margin: 0 5px;">
+    <img src="sub3.png" alt="Image 3" style="max-width: 250px; margin: 0 5px;">
+  </div>
+  
+  <div id="letsPlayText">LET'S PLAY</div>
+  <div id="helloText">
+    <h2>Introduction Phase</h2>
+    <p>Greetings and welcome viewers. (2 minutes)</p>
+    <p>Briefly discuss the game you'll be playing. (5 minutes)</p>
+    <p>Mention any specific goals, activity, or challenge in this stream session. (2 minutes)</p>
+    <h2>Picking Games</h2>
+    <p>Look for interesting games with viewers (2-5 minutes)</p>
+    <p>Provide an overview of the Roblox game we have picked. (2-5 minutes)</p>
+    <h2>Gameplay</h2>
+    <p>Explain or learn about the basic controls and mechanics of the games (5-10 minutes)</p>
+    <p>Play and enjoy the game with the viewers 😃 (30 minutes to 2 hours)</p>
+    <h2>Interactive Elements</h2>
+    <p>Interact with the viewers by chatting with them like how we would chat with friends (Throughout the stream)</p>
+    <p>Encourage questions, comments, and suggestions from the audience.</p>
+    <p>Encourage viewers to clip certain notable experiences in the stream</p>
+    <h2>Break</h2>
+    <p>Schedule short breaks such as bathroom breaks or breaks to hydrate yourself (5-10 minutes)</p>
+    <p>Use breaks to answer viewer questions or discuss related topics.</p>
+    <h2>Progress Update</h2>
+    <p>Share your progress with the game (2-5 minutes)</p>
+    <p>Look and watch clips that viewers have clipped (5-10 minutes)</p>
+    <h2>Conclusion</h2>
+    <p>Thank the viewers for joining the stream</p>
+    <p>Mention any upcoming streams or content in the future</p>
+  </div>
+  <footer>
+    <div id="aboutUsText" style="display: none; position: absolute; bottom: 20px; left: 5%; color: #fce7b0; font-size: 18px;">
+      We're a diverse, passionate
+      team delivering an immersive
+      gaming experience. Join us
+      for unforgettable adventures.
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      showContent('home');
+    });
+
+    function showContent(sectionId) {
+      var contentSection = document.getElementById('content');
+      var body = document.body;
+      var header = document.querySelector('header');
+      var footer = document.querySelector('footer');
+      var streamingText = document.getElementById('streamingText');
+      var additionalText = document.getElementById('additionalText');
+      var newText = document.getElementById('newText');
+      var letsPlayText = document.getElementById('letsPlayText');
+      var streamingImage = document.getElementById('streamingImage');
+      var membersList = document.getElementById('membersList');
+      var aboutUsText = document.getElementById('aboutUsText');
+      var helloText = document.getElementById('helloText');
+      var promotionImage = document.getElementById('promotionImage');
+      var promotionLinks = document.getElementById('promotionLinks');
+      var links = document.querySelectorAll('nav a');
+      var sixfoldLink = document.getElementById('sixfoldLink');
+      var images = document.querySelectorAll('img[src="subheading.png"], img[src="sub2.png"], img[src="sub3.png"]');
+
+      links.forEach(link => {
+        link.style.color = link.classList.contains('black-text') ? '#000' : '#fce7b0';
+      });
+
+      links.forEach(link => {
+        link.classList.remove('active');
+        link.querySelector('.star').style.display = 'none';
+      });
+
+      contentSection.innerHTML = '';
+      membersList.style.display = 'none';
+      letsPlayText.style.display = 'none';
+      aboutUsText.style.display = 'none';
+      helloText.style.display = 'none';
+      promotionImage.style.display = 'none';
+      promotionLinks.style.display = 'none';
+
+      if (sectionId === 'about') {
+        body.style.backgroundColor = '#394147';
+        header.style.backgroundColor = '#394147';
+        footer.style.backgroundColor = '#9b1826';
+
+        streamingImage.style.display = 'block';
+        streamingText.style.display = 'block';
+        additionalText.style.display = 'block';
+        membersList.style.display = 'block';
+        newText.style.display = 'block';
+        letsPlayText.style.display = 'block';
+        aboutUsText.style.display = 'block';
+
+        sixfoldLink.style.display = 'none';
+
+        images.forEach(image => {
+    image.style.display = 'none';
+        });
+
+        const clickedLink = links.find(link => link.getAttribute('onclick').includes(sectionId));
+        clickedLink.classList.add('active');
+        clickedLink.querySelector('.star').style.display = 'inline-block';
+      } else if (sectionId === 'streamPlan') {
+        body.style.backgroundColor = '#394147';
+        header.style.backgroundColor = '#394147';
+        footer.style.backgroundColor = '#394147';
+
+        streamingImage.style.display = 'none';
+        streamingText.style.display = 'none';
+        additionalText.style.display = 'none';
+        membersList.style.display = 'none';
+        newText.style.display = 'none';
+        letsPlayText.style.display = 'none';
+        aboutUsText.style.display = 'none';
+
+        helloText.style.display = 'block';
+        images.forEach(image => {
+          image.style.display = 'none';
+        });
+
+        const clickedLink = links.find(link => link.getAttribute('onclick').includes(sectionId));
+        clickedLink.classList.add('active');
+        clickedLink.querySelector('.star').style.display = 'inline-block';
+      } else if (sectionId === 'promote') {
+        body.style.backgroundColor = '#9b1826';
+        header.style.backgroundColor = '#394147';
+        footer.style.backgroundColor = '#9b1826';
+
+        streamingImage.style.display = 'none';
+        streamingText.style.display = 'none';
+        additionalText.style.display = 'none';
+        membersList.style.display = 'none';
+        newText.style.display = 'none';
+        letsPlayText.style.display = 'none';
+        aboutUsText.style.display = 'none';
+        sixfoldLink.style.display = 'none'; 
+
+        promotionImage.style.display = 'block';
+        promotionLinks.style.display = 'block';
+
+        images.forEach(image => {
+          image.style.display = 'none';
+        });
+
+        const clickedLink = links.find(link => link.getAttribute('onclick').includes(sectionId));
+        clickedLink.classList.add('active');
+        clickedLink.querySelector('.star').style.display = 'inline-block';
+
+      } else if (sectionId === 'home') {
+        body.style.backgroundColor = '#9b1826';
+        header.style.backgroundColor = '#394147';
+        footer.style.backgroundColor = '#9b1826';
+
+        var img = document.createElement('img');
+        img.id = 'legionImage';
+        img.src = 'SIXFOLD LEGION.png';
+        img.alt = 'Description of the image';
+        contentSection.appendChild(img);
+        sixfoldLink.style.display = 'inline-block'; 
+    
+
+
+        streamingImage.style.display = 'none';
+        streamingText.style.display = 'none';
+        additionalText.style.display = 'none';
+        membersList.style.display = 'none';
+        newText.style.display = 'none';
+        letsPlayText.style.display = 'none';
+        aboutUsText.style.display = 'none';
+        helloText.style.display = 'none';
+
+        images.forEach(image => {
+          image.style.display = 'inline-block';
+        });
+
+        const clickedLink = links.find(link => link.getAttribute('onclick').includes(sectionId));
+        clickedLink.classList.add('active');
+        clickedLink.querySelector('.star').style.display = 'inline-block';
+      }
+    }
+
+    function createPromotionLink(href, text) {
+      var link = document.createElement('a');
+      link.href = href;
+      link.target = '_blank';
+      link.textContent = text;
+      link.style.display = 'block';
+      link.style.textAlign = 'center';
+      link.style.margin = 'auto';
+      return link;
+    }
+  </script>
+</body>
+
+</html>
